@@ -3,12 +3,20 @@
  */
 package quotes;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class App {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         FetchQuote demo = new FetchQuote();
-        demo.getRandomQuote("/Users/Ran/code-fellows/java-fundamentals/quotes/src/main/resources/quotes.json");
+
+        if (args[0].toLowerCase().equals("internet") || args[0].toLowerCase().equals("i")) {
+            demo.getRandomQuoteInternet("http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en","src/main/resources/quotes.json");
+
+        } else if (args[0].toLowerCase().equals("local") || args[0].toLowerCase().equals("l") ||
+                args[0].toLowerCase().equals("computer") || args[0].toLowerCase().equals("c")) {
+            demo.getRandomQuoteLocal("src/main/resources/quotes.json");
+        }
     }
 }
+
